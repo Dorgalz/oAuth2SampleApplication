@@ -256,7 +256,7 @@ app.post('/rise/workflows/actions/v1/invoke', express.text(), (req, res) => {
     res.status(200).json({ success: true, result });
 
     // Process gift card creation asynchronously
-    if (request.actionKey === 'rise_test_application-create_giftcard_v1') {
+    if (request.actionKey === 'rise_test_application-create_giftcard') {
       handleCreateGiftCardAsync(request, metadata).catch(error => {
         console.error('Background gift card creation failed:', error.message);
       });
@@ -272,7 +272,7 @@ app.post('/rise/workflows/actions/v1/invoke', express.text(), (req, res) => {
 });
 
 function handleWorkflowInvocation(request, metadata) {
-  if (request.actionKey === 'rise_test_application-create_giftcard_v1') {
+  if (request.actionKey === 'rise_test_application-create_giftcard') {
     const { name, email, amount = "50.00", currency = 'USD' } = request.actionParams || {};
     
     return {
@@ -311,6 +311,7 @@ async function handleCreateGiftCardAsync(request, metadata) {
         initialValue: amount,
         sourceInfo: {
           type: "MANUAL",
+          manualOptions: {},
           initiator: { type: "APP", id: CLIENT_ID }
         },
         currency,

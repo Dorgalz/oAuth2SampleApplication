@@ -142,7 +142,7 @@ app.post('/rise/workflows/actions/v1/invoke', express.text(), (req, res) => {
   const { request, metadata } = payload.data;
 
   // Handle different workflow actions
-  if (request.actionKey === 'rise_test_application-create_giftcard_v1') {
+  if (request.actionKey === 'rise_test_application-create_giftcard') {
     // Process gift card creation workflow
     // Return immediate response, process asynchronously
   }
